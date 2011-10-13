@@ -62,6 +62,7 @@ public final class DefaultFlag {
     public static final RegionGroupFlag EXIT_PERM = new RegionGroupFlag("exit-group", RegionGroupFlag.RegionGroup.NON_MEMBERS);
     public static final StringFlag GREET_MESSAGE = new StringFlag("greeting");
     public static final StringFlag FAREWELL_MESSAGE = new StringFlag("farewell");
+    public static final StringFlag PERM_TOGGLE = new StringFlag("perm-toggle");
     public static final BooleanFlag NOTIFY_ENTER = new BooleanFlag("notify-enter");
     public static final BooleanFlag NOTIFY_LEAVE = new BooleanFlag("notify-leave");
     public static final SetFlag<CreatureType> DENY_SPAWN = new SetFlag<CreatureType>("deny-spawn", new CreatureTypeFlag(null));

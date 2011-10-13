@@ -364,6 +364,38 @@ public class WorldGuardPlugin extends JavaPlugin {
             throw new CommandPermissionsException();
         }
     }
+
+    /**
+     * Adds permissions.
+     *
+     * @param sender
+     * @param perm
+     * @return
+     */
+    public boolean addPermission(CommandSender sender, String perm) {
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            // @TODO implement addPermission
+            //return perms.addPermission(player.getWorld().getName(), player.getName(), perm);
+        }
+        return false;
+    }
+
+    /**
+     * Removes permissions.
+     *
+     * @param sender
+     * @param perm
+     * @return
+     */
+    public boolean removePermission(CommandSender sender, String perm) {
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            // @TODO implement removePermission
+            //return perms.removePermission(player.getWorld().getName(), player.getName(), perm);
+        }
+        return false;
+    }
     
     /**
      * Checks to see if the sender is a player, otherwise throw an exception.

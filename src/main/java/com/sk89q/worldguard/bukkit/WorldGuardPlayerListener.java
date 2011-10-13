@@ -345,6 +345,7 @@ public class WorldGuardPlayerListener extends PlayerListener {
                 String farewell = set.getFlag(DefaultFlag.FAREWELL_MESSAGE);
                 Boolean notifyEnter = set.getFlag(DefaultFlag.NOTIFY_ENTER);
                 Boolean notifyLeave = set.getFlag(DefaultFlag.NOTIFY_LEAVE);
+                String togglePerm = set.getFlag(DefaultFlag.PERM_TOGGLE);
                 
                 if (state.lastFarewell != null && (farewell == null 
                         || !state.lastFarewell.equals(farewell))) {
@@ -359,14 +360,14 @@ public class WorldGuardPlayerListener extends PlayerListener {
                             player, BukkitUtil.replaceColorMacros(greeting));
                     player.sendMessage(ChatColor.AQUA + " ** " + replacedGreeting);
                 }
-                
+
                 if ((notifyLeave == null || !notifyLeave)
                         && state.notifiedForLeave != null && state.notifiedForLeave) {
                     plugin.broadcastNotification(ChatColor.GRAY + "WG: " 
                             + ChatColor.LIGHT_PURPLE + player.getName()
                             + ChatColor.GOLD + " left NOTIFY region");
                 }
-                
+
                 if (notifyEnter != null && notifyEnter && (state.notifiedForEnter == null
                         || !state.notifiedForEnter)) {
                     StringBuilder regionList = new StringBuilder();
@@ -385,6 +386,15 @@ public class WorldGuardPlayerListener extends PlayerListener {
                             + regionList);
                 }
 
+                if (togglePerm != null) {
+                    if (!togglePerm.equals(state.lastPerm)) {
+                        plugin.addPermission(player, togglePerm);
+                        plugin.removePermission(player, state.lastPerm);
+                    }
+                } else if (state.lastPerm != null) {
+                    plugin.removePermission(player, state.lastPerm);
+                }
+
                 state.lastGreeting = greeting;
                 state.lastFarewell = farewell;
                 state.notifiedForEnter = notifyEnter;
@@ -394,6 +404,7 @@ public class WorldGuardPlayerListener extends PlayerListener {
                 state.lastBlockX = event.getTo().getBlockX();
                 state.lastBlockY = event.getTo().getBlockY();
                 state.lastBlockZ = event.getTo().getBlockZ();
+                state.lastPerm = togglePerm;
             }
         }
     }
